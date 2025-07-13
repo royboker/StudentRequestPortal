@@ -1,0 +1,41 @@
+# Page snapshot
+
+```yaml
+- img "Logo"
+- heading "הצטרף למשפחה שלנו !" [level=2]
+- text: שם פרטי
+- textbox "הזן את שמך הפרטי": רוי
+- text: שם משפחה
+- textbox "הזן את שם המשפחה שלך": בוקר
+- text: אימייל
+- textbox "האימייל שלך": roy4552@test.com
+- text: תעודת זהות
+- textbox "תעודת הזהות שלך": "85456521"
+- text: מחלקה
+- combobox:
+  - option "– בחר מחלקה –"
+  - option "Data scince" [selected]
+  - option "Software"
+  - option "electricity"
+  - option "architecture"
+- text: טלפון
+- textbox "מספר הטלפון שלך": "0501234567"
+- text: סיסמה
+- textbox "סיסמה חדשה": Pass123
+- list:
+  - listitem: ✔ 6 תווים
+  - listitem: ✔ אות גדולה
+  - listitem: ✔ אות קטנה
+- text: אישור סיסמה
+- textbox "אימות סיסמה": Pass123
+- text: סוג משתמש
+- combobox:
+  - option "סטודנט" [selected]
+  - option "מרצה"
+- button "הירשם"
+- paragraph: האימייל כבר קיים במערכת.
+- separator
+- text: או
+- button "חזרה להתחברות"
+- img "Campus illustration"
+```

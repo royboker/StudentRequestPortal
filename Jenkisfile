@@ -1,0 +1,520 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                sh '''
+                    echo "== Checking out code from repository =="
+                    exit 0
+                '''
+            }
+        }
+
+        stage('Setup') {
+            steps {
+                sh '''
+                    echo "== Setting up virtual environment and installing dependencies =="
+                    sleep 25
+                    echo "[venv] All dependencies installed successfully."
+                    exit 0
+                '''
+            }
+        }
+
+        stage('Code Analysis') {
+            steps {
+                sh '''
+                    echo "== Starting code analysis (simulated) =="
+                    echo "[radon] Simulated cyclomatic complexity report generated."
+                    echo "[flake8] 0 issues found."
+                    mkdir -p reports/code-analysis
+                    cat <<EOF > reports/code-analysis/index.html
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Code Analysis Report</title>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+                            .metric { background: #f5f5f5; padding: 20px; margin: 10px; border-radius: 5px; }
+                            .chart-container { width: 500px; margin: 30px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee; padding: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Code Analysis Report</h1>
+                        <div class="metric">
+                            <h2>Code Metrics</h2>
+                            <p>Lines of code: 5000</p>
+                            <p>Complexity: Medium</p>
+                            <p>Code quality: Good</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="complexityRadar"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="moduleCoverageBar"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="duplicationPie"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="issuesPolar"></canvas>
+                        </div>
+                        <script>
+                            new Chart(document.getElementById('complexityRadar'), {
+                                type: 'radar',
+                                data: {
+                                    labels: ['Complexity', 'Maintainability', 'Reliability', 'Security', 'Performance'],
+                                    datasets: [{
+                                        label: 'Code Quality Metrics',
+                                        data: [75, 85, 90, 95, 80],
+                                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                        borderColor: 'rgb(54, 162, 235)',
+                                        pointBackgroundColor: 'rgb(54, 162, 235)'
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('moduleCoverageBar'), {
+                                type: 'bar',
+                                data: {
+                                    labels: ['users', 'requests', 'academics', 'core'],
+                                    datasets: [{
+                                        label: 'Coverage %',
+                                        data: [92, 85, 78, 88],
+                                        backgroundColor: ['#4CAF50', '#FF5252', '#FFC107', '#2196F3']
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('duplicationPie'), {
+                                type: 'pie',
+                                data: {
+                                    labels: ['Unique', 'Duplicated'],
+                                    datasets: [{
+                                        data: [87, 13],
+                                        backgroundColor: ['#8BC34A', '#E91E63']
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('issuesPolar'), {
+                                type: 'polarArea',
+                                data: {
+                                    labels: ['Bugs', 'Vulnerabilities', 'Code Smells', 'Style'],
+                                    datasets: [{
+                                        data: [2, 0, 7, 4],
+                                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50']
+                                    }]
+                                }
+                            });
+                        </script>
+                    </body>
+                    </html>
+EOF
+                    sleep 30
+                    exit 0
+                '''
+            }
+        }
+
+        stage('Tests') {
+            steps {
+                sh '''
+                    echo "== Running tests (simulated) =="
+                    echo "[pytest] 150 unit tests PASSED."
+                    echo "[pytest] 45 integration tests PASSED."
+                    echo "Test coverage: 85%"
+                    mkdir -p reports/tests
+                    cat <<EOF > reports/tests/index.html
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Test Report</title>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+                            .metric { background: #f5f5f5; padding: 20px; margin: 10px; border-radius: 5px; }
+                            .chart-container { width: 500px; margin: 30px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee; padding: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Test Report</h1>
+                        <div class="metric">
+                            <h2>Test Results</h2>
+                            <p>Unit tests: 150 passed</p>
+                            <p>Integration tests: 45 passed</p>
+                            <p>Coverage: 85%</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="coverageDoughnut"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="testTypePie"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="testDurationLine"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="testStatusBar"></canvas>
+                        </div>
+                        <script>
+                            new Chart(document.getElementById('coverageDoughnut'), {
+                                type: 'doughnut',
+                                data: {
+                                    labels: ['Covered', 'Not Covered'],
+                                    datasets: [{
+                                        data: [85, 15],
+                                        backgroundColor: ['#4CAF50', '#FF5252']
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('testTypePie'), {
+                                type: 'pie',
+                                data: {
+                                    labels: ['Unit', 'Integration', 'E2E'],
+                                    datasets: [{
+                                        data: [150, 45, 10],
+                                        backgroundColor: ['#4CAF50', '#FF9800', '#2196F3']
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('testDurationLine'), {
+                                type: 'line',
+                                data: {
+                                    labels: ['Run 1', 'Run 2', 'Run 3', 'Run 4'],
+                                    datasets: [{
+                                        label: 'Test Duration (sec)',
+                                        data: [120, 110, 130, 100],
+                                        borderColor: '#4CAF50',
+                                        fill: false
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('testStatusBar'), {
+                                type: 'bar',
+                                data: {
+                                    labels: ['Passed', 'Failed', 'Skipped'],
+                                    datasets: [{
+                                        label: 'Tests',
+                                        data: [195, 2, 8],
+                                        backgroundColor: ['#4CAF50', '#FF5252', '#FFC107']
+                                    }]
+                                }
+                            });
+                        </script>
+                    </body>
+                    </html>
+EOF
+                    sleep 55
+                    exit 0
+                '''
+            }
+        }
+
+        stage('Performance') {
+            steps {
+                sh '''
+                    echo "== Running performance benchmarks (simulated) =="
+                    echo "[jmeter] Avg response time: 150ms"
+                    echo "[jmeter] Throughput: 100 req/sec"
+                    echo "[jmeter] Error rate: 0.1%"
+                    mkdir -p reports/performance
+                    cat <<EOF > reports/performance/index.html
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Performance Report</title>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+                            .metric { background: #f5f5f5; padding: 20px; margin: 10px; border-radius: 5px; }
+                            .chart-container { width: 500px; margin: 30px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee; padding: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Performance Report</h1>
+                        <div class="metric">
+                            <h2>Performance Metrics</h2>
+                            <p>Response time: 150ms</p>
+                            <p>Throughput: 100 req/sec</p>
+                            <p>Error rate: 0.1%</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="responseTimeLine"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="throughputBar"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="errorRatePie"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="latencyPolar"></canvas>
+                        </div>
+                        <script>
+                            new Chart(document.getElementById('responseTimeLine'), {
+                                type: 'line',
+                                data: {
+                                    labels: ['1min', '2min', '3min', '4min', '5min'],
+                                    datasets: [{
+                                        label: 'Response Time (ms)',
+                                        data: [150, 145, 155, 148, 152],
+                                        borderColor: 'rgb(75, 192, 192)',
+                                        tension: 0.1
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('throughputBar'), {
+                                type: 'bar',
+                                data: {
+                                    labels: ['API', 'DB', 'Cache', 'Auth'],
+                                    datasets: [{
+                                        label: 'Throughput (req/sec)',
+                                        data: [100, 80, 120, 90],
+                                        backgroundColor: ['#2196F3', '#FFC107', '#4CAF50', '#FF5252']
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('errorRatePie'), {
+                                type: 'pie',
+                                data: {
+                                    labels: ['Success', 'Errors'],
+                                    datasets: [{
+                                        data: [99.9, 0.1],
+                                        backgroundColor: ['#4CAF50', '#FF5252']
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('latencyPolar'), {
+                                type: 'polarArea',
+                                data: {
+                                    labels: ['<100ms', '100-200ms', '200-500ms', '>500ms'],
+                                    datasets: [{
+                                        data: [60, 30, 8, 2],
+                                        backgroundColor: ['#4CAF50', '#FFC107', '#2196F3', '#FF5252']
+                                    }]
+                                }
+                            });
+                        </script>
+                    </body>
+                    </html>
+EOF
+                    sleep 60
+                    exit 0
+                '''
+            }
+        }
+
+        stage('Security') {
+            steps {
+                sh '''
+                    echo "== Running security checks (simulated) =="
+                    echo "[safety] 0 vulnerabilities found."
+                    echo "[dependency-check] All dependencies up to date."
+                    mkdir -p reports/security
+                    cat <<EOF > reports/security/index.html
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Security Report</title>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+                            .metric { background: #f5f5f5; padding: 20px; margin: 10px; border-radius: 5px; }
+                            .chart-container { width: 500px; margin: 30px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee; padding: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Security Report</h1>
+                        <div class="metric">
+                            <h2>Security Metrics</h2>
+                            <p>Vulnerabilities: None found</p>
+                            <p>Dependencies: All up to date</p>
+                            <p>Security score: A+</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="securityBar"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="vulnPie"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="dependencyDoughnut"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="securityRadar"></canvas>
+                        </div>
+                        <script>
+                            new Chart(document.getElementById('securityBar'), {
+                                type: 'bar',
+                                data: {
+                                    labels: ['Authentication', 'Authorization', 'Data Protection', 'Input Validation', 'Error Handling'],
+                                    datasets: [{
+                                        label: 'Security Score',
+                                        data: [95, 90, 85, 88, 92],
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgb(75, 192, 192)',
+                                        borderWidth: 1
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('vulnPie'), {
+                                type: 'pie',
+                                data: {
+                                    labels: ['Critical', 'High', 'Medium', 'Low', 'None'],
+                                    datasets: [{
+                                        data: [0, 0, 1, 2, 97],
+                                        backgroundColor: ['#FF5252', '#FF9800', '#FFC107', '#2196F3', '#4CAF50']
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('dependencyDoughnut'), {
+                                type: 'doughnut',
+                                data: {
+                                    labels: ['Up to date', 'Outdated'],
+                                    datasets: [{
+                                        data: [98, 2],
+                                        backgroundColor: ['#4CAF50', '#FF5252']
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('securityRadar'), {
+                                type: 'radar',
+                                data: {
+                                    labels: ['OWASP A1', 'OWASP A2', 'OWASP A3', 'OWASP A4', 'OWASP A5'],
+                                    datasets: [{
+                                        label: 'Compliance %',
+                                        data: [100, 95, 90, 98, 97],
+                                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                        borderColor: 'rgb(255, 99, 132)',
+                                        pointBackgroundColor: 'rgb(255, 99, 132)'
+                                    }]
+                                }
+                            });
+                        </script>
+                    </body>
+                    </html>
+EOF
+                    sleep 24
+                    exit 0
+                '''
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh '''
+                    echo "== Building project (simulated) =="
+                    echo "[build] Frontend build: Success"
+                    echo "[build] Backend build: Success"
+                    echo "[build] Static files: Collected"
+                    mkdir -p reports/build
+                    cat <<EOF > reports/build/index.html
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Build Report</title>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+                            .metric { background: #f5f5f5; padding: 20px; margin: 10px; border-radius: 5px; }
+                            .chart-container { width: 500px; margin: 30px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee; padding: 20px; }
+                            .success { color: #4CAF50; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Build Report</h1>
+                        <div class="metric">
+                            <h2>Build Results</h2>
+                            <p class="success">Frontend build: Success</p>
+                            <p class="success">Backend build: Success</p>
+                            <p class="success">Static files: Collected</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="buildTimeLine"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="buildStatusPie"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="artifactBar"></canvas>
+                        </div>
+                        <script>
+                            new Chart(document.getElementById('buildTimeLine'), {
+                                type: 'line',
+                                data: {
+                                    labels: ['Frontend', 'Backend', 'Static'],
+                                    datasets: [{
+                                        label: 'Build Time (sec)',
+                                        data: [60, 80, 30],
+                                        borderColor: '#2196F3',
+                                        fill: false
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('buildStatusPie'), {
+                                type: 'pie',
+                                data: {
+                                    labels: ['Success', 'Failed'],
+                                    datasets: [{
+                                        data: [3, 0],
+                                        backgroundColor: ['#4CAF50', '#FF5252']
+                                    }]
+                                }
+                            });
+                            new Chart(document.getElementById('artifactBar'), {
+                                type: 'bar',
+                                data: {
+                                    labels: ['JS', 'CSS', 'Images', 'Fonts'],
+                                    datasets: [{
+                                        label: 'Artifacts',
+                                        data: [12, 8, 20, 5],
+                                        backgroundColor: ['#FFC107', '#2196F3', '#4CAF50', '#FF9800']
+                                    }]
+                                }
+                            });
+                        </script>
+                    </body>
+                    </html>
+EOF
+                    sleep 23
+                    exit 0
+                '''
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    echo "== Deploying application (simulated) =="
+                    echo "Deployment successful!"
+                    sleep 60
+                    exit 0
+                '''
+            }
+        }
+
+        stage('Debug Reports') {
+            steps {
+                sh '''
+                    echo "Listing all report files for debug:"
+                    find reports
+                    ls -lR reports
+                    exit 0
+                '''
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline completed!"
+            archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
+        }
+        success {
+            echo "Pipeline succeeded!"
+        }
+        failure {
+            echo "Pipeline failed!"
+        }
+    }
+}
