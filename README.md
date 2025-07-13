@@ -41,20 +41,6 @@ The platform streamlines workflows, ensures transparency, and provides a modern 
 
 ---
 
-## 🚀 Demo
-
-Coming soon – deployment planned on AWS (Elastic Beanstalk + RDS).
-
----
-
-## 👥 Team
-
-- Maxi Israel Krutinski
-- Gal Moshe Tayeb
-- Roy Boker
-- Noam Kadush
-
----
 
 ### 📌 Note
 
