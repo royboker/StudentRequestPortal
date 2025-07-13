@@ -1,104 +1,64 @@
-# מערכת אינטראקטיבית למילוי בקשות סטודנט
+# 🎓 Student Request Portal
 
-**פרויקט גמר בקורס ניהול פרויקטי תוכנה | SCE 2025**
+**Final Project for Software Project Management | SCE 2025**
 
-מערכת דיגיטלית אינטואיטיבית להגשת ומעקב אחר בקשות סטודנטים, מרצים ומזכירות.  
-המערכת מספקת חוויית שימוש מתקדמת, אוטומציה, שקיפות ותהליך זרימה מהיר ונוח.
-
----
-
-## ⚡ התקנה והרצה מקומית
-
-### שלב ראשון – קובץ .env
-- יש להוריד את קובץ ה-`.env` מהקישור הבא: https://drive.google.com/file/d/1UHJvjXulNRyFLYQp0fViOkuItKpPrQcz/view?usp=sharing
-- יש למקם אותו בתיקיית `backend` אחרי שהורדת את הקוד (`git clone`).
+An intuitive web system designed for students, faculty, and administrative staff to submit, process, and track academic requests.  
+The platform streamlines workflows, ensures transparency, and provides a modern digital experience for all stakeholders.
 
 ---
 
-### טרמינל ראשון – הפעלת ה-Backend (Django)
+## ✨ Key Features
 
-1. **נווט לתיקיית** `backend` בטרמינל.
-2. **מחק את תיקיית** `venv` הקיימת אם יש.
-3. הפעל:
-    ```bash
-    python -m venv venv
-    .\venv\Scripts\activate    # ב-Windows
-    pip install -r requirements.txt
-    ```
-4. הרץ:
-    ```bash
-    python manage.py makemigrations
-    ```
-    - אם קופצת שגיאה שחסרות חבילות (למשל `dotenv`, `openai`), התקן ידנית (`pip install package_name`) והרץ שוב את הפקודה עד שתצליח.
-5. המשך:
-    ```bash
-    python manage.py migrate
-    python manage.py createsuperuser
-    ```
-    - צור משתמש אדמין (לכניסה לכתובת http://localhost:8000/admin/)
-6. הפעל את השרת:
-    ```bash
-    python manage.py runserver
-    ```
+- 🔐 Authentication & authorization for students, lecturers, and secretaries
+- 📑 Personalized profiles, including secure document uploads (e.g., military service docs)
+- 📝 Smart submission of various requests: grade appeals, exemptions, military reserve, and more
+- 🚦 End-to-end request management: status tracking, notifications, and admin actions
+- 📊 Interactive dashboards for each user role
+- 💬 AI-powered chatbot (OpenAI integration) for automated assistance
+- 🔍 Advanced filtering & searching of requests
+- ⭐ Ratings & feedback mechanism for improving administrative services
 
 ---
 
-### טרמינל שני – הפעלת ה-Frontend (React)
+## ⚙️ Tech Stack
 
-1. **נווט לתיקיית** `frontend` בטרמינל.
-2. הפעל:
-    ```bash
-    npm install
-    npm start
-    ```
-
----
-
-> **לאחר ההרצה, יש להיכנס לממשק admin וליצור מחלקה לפני ההרשמה למערכת!**
-
----
-
-## 🧩 טכנולוגיות עיקריות
-
-- **Backend:** Django, Django REST Framework (Python)
+- **Backend:** Django & Django REST Framework (Python)
 - **Frontend:** React
-- **DB:** SQLite (פיתוח)
-- **DevOps:** GitHub, Jira, Jenkins (CI/CD)
-- **AI:** אינטגרציה עם ChatBot מבוסס OpenAI
+- **Database:** SQLite (dev environment)
+- **AI:** OpenAI ChatBot for intelligent request guidance
+- **CI/CD & Tools:** GitHub, Jira, Jenkins
 
 ---
 
-## 🚀 פיצ'רים עיקריים
+## 🏆 Highlights & Contributions
 
-- הרשמה והתחברות עם שכחת סיסמה לכל סוג משתמש
-- פרופיל אישי ועדכון פרטים (כולל העלאת מסמך מילואים)
-- הגשת בקשות חכמות: ערעורים, אישורים, חריגות ועוד
-- ניהול ומעקב סטטוס בקשות, התראות ועדכונים
-- Dashboard ניהולי למזכירות, מרצים וסטודנטים
-- מערכת דירוגים ומשובים
-- חיפוש וסינון בקשות מתקדם
-- צ'אט־בוט חכם (AI) למענה מהיר על שאלות
+✅ Designed and implemented a full-stack solution with clear separation of concerns (frontend/backend)  
+✅ Built robust REST APIs for handling authentication, user management, and complex request flows  
+✅ Developed a smart request approval pipeline with multi-role access (students, lecturers, secretaries)  
+✅ Integrated an OpenAI-based chatbot for guiding users through request submissions and FAQs  
+✅ Implemented dashboards with real-time request status, filters, and role-based actions  
+✅ Collaborated using GitHub for version control, Jira for agile task management, and Jenkins for automated builds & tests  
 
 ---
 
-## 👨‍💻 צוות הפרויקט
+## 🚀 Demo
 
-- מקסי ישראל קרוטינסקי
-- גל משה טאייב
-- רוי בוקר
-- נועם קדוש
-  
+Coming soon – deployment planned on AWS (Elastic Beanstalk + RDS).
 
 ---
 
-## הערות ודרישות מערכת
+## 👥 Team
 
-- הפרויקט פועל בתצורת Client-Server – חובה להפעיל את ה-Backend וה-Frontend במקביל.
-- Python 3.11 ומעלה, NodeJS עדכני.
-- עבודה רציפה עם GitHub, Jira, Jenkins.
-- כל שינוי – קומיט ו־Push מסודר ל־GitHub.
+- Maxi Israel Krutinski
+- Gal Moshe Tayeb
+- Roy Boker
+- Noam Kadush
 
 ---
 
-בהצלחה!  
-כל שאלה, אפשר לפנות ל־admin או לכתוב בקבוצת הפרויקט 🙌
+### 📌 Note
+
+This repository reflects a real academic final project designed to simulate enterprise-grade solutions.  
+For any questions, feel free to reach out via GitHub or LinkedIn.
+
+---
